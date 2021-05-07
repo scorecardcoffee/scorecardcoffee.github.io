@@ -1,1 +1,69 @@
-Hello world
+<html lang="en-US">
+<head>
+    <title>scorecard.coffee</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        h3 span {
+            font-size: 22px;
+        }
+        h3 input.search-input {
+            width: 300px;
+            margin-left: auto;
+            float: right
+        }
+        .mt32 {
+            margin-top: 32px;
+        }
+    </style>
+</head>
+<body class="mt32">
+    <div class="container">
+        <h3>
+            <span>scorecard.coffee</span>
+            <input type="search" placeholder="Search..." class="form-control search-input" data-table="customers-list"/>
+        </h3>
+        <table class="table table-striped mt32 customers-list">
+	   <thead><tr><th>roaster</th><th>name</th><th>price</th><th>link</th></tr></thead><tbody><tr><td>Villino Coffee Roasters</td><td>Synergy Espresso Blend</td><td>$42.00</td><td>https://villino.com.au/synergy-espresso-blend/</td></tr><tr><td>Villino Coffee Roasters</td><td>Aphotic Espresso Blend</td><td>$38.00</td><td>https://villino.com.au/aphotic-espresso-blend/</td></tr><tr><td>Villino Coffee Roasters</td><td>Hybrid Espresso Blend</td><td>$38.00</td><td>https://villino.com.au/hybrid-espresso-blend/</td></tr><tr><td>Villino Coffee Roasters</td><td>Seasonal Filter Blend #7</td><td>$54.00</td><td>https://villino.com.au/seasonal-filter-blend-7</td></tr><tr><td>Villino Coffee Roasters</td><td>Guatemala Quetzal</td><td>$46.00</td><td>https://villino.com.au/guatemala-quetzal/</td></tr><tr><td>Villino Coffee Roasters</td><td>Colombia Popayan Decaf</td><td>$42.00</td><td>https://villino.com.au/colombia-popayan-decaf/</td></tr><tr><td>Villino Coffee Roasters</td><td>Mexico Finca Kassandra</td><td>$42.00</td><td>https://villino.com.au/mexico-finca-kassandra/</td></tr><tr><td>Villino Coffee Roasters</td><td>Ethiopia Yirgacheffe</td><td>$46.00</td><td>https://villino.com.au/ethiopia-yirgacheffe/</td></tr><tr><td>Villino Coffee Roasters</td><td>Colombia San Sebastian</td><td>$46.00</td><td>https://villino.com.au/colombia-la-plata/</td></tr><tr><td>Villino Coffee Roasters</td><td>Specialty Coffee Pods - Pack 20</td><td>$20.00</td><td>https://villino.com.au/specialty-coffee-pods/</td></tr><tr><td>Villino Coffee Roasters</td><td>Specialty Coffee Pods - Blend - Pack 20</td><td>$20.00</td><td>https://villino.com.au/specialty-coffee-pods-blend-pack-20/</td></tr><tr><td>Villino Coffee Roasters</td><td>PNG Kaw Kaw Mountain</td><td>$58.00</td><td>https://villino.com.au/png-kaw-kaw-mountain-1/</td></tr><tr><td>Villino Coffee Roasters</td><td>Colombia Rafael Amaya</td><td>$60.00</td><td>https://villino.com.au/colombia-rafael-amaya-1/</td></tr><tr><td>Villino Coffee Roasters</td><td>Ethiopia Keffa Wush Wush</td><td>$54.00</td><td>https://villino.com.au/ethiopia-keffa-wush-wush/</td></tr><tr><td>Villino Coffee Roasters</td><td>Brazil Dolce Cerrado</td><td>$62.00</td><td>https://villino.com.au/brazil-dolce-cerrado/</td></tr><tr><td>Villino Coffee Roasters</td><td>Honduras El Danto</td><td>$70.00</td><td>https://villino.com.au/honduras-el-danto/</td></tr><tr><td>Villino Coffee Roasters</td><td>Colombia El Faldon</td><td>$70.00</td><td>https://villino.com.au/colombia-el-faldon/</td></tr><tr><td>Villino Coffee Roasters</td><td>Colombia El Hormiguero</td><td>$70.00</td><td>https://villino.com.au/colombia-el-hormiguero/</td></tr><tr><td>Villino Coffee Roasters</td><td>Feature Filter: Colombia El Faldon</td><td>$70.00</td><td>https://villino.com.au/feature-filter-colombia-el-faldon/</td></tr></tbody>
+	   </table>
+    </div>
+    <script>
+        (function(document) {
+            'use strict';
+
+            var TableFilter = (function(myArray) {
+                var search_input;
+
+                function _onInputSearch(e) {
+                    search_input = e.target;
+                    var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                    myArray.forEach.call(tables, function(table) {
+                        myArray.forEach.call(table.tBodies, function(tbody) {
+                            myArray.forEach.call(tbody.rows, function(row) {
+                                var text_content = row.textContent.toLowerCase();
+                                var search_val = search_input.value.toLowerCase();
+                                row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                            });
+                        });
+                    });
+                }
+
+                return {
+                    init: function() {
+                        var inputs = document.getElementsByClassName('search-input');
+                        myArray.forEach.call(inputs, function(input) {
+                            input.oninput = _onInputSearch;
+                        });
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function() {
+                if (document.readyState === 'complete') {
+                    TableFilter.init();
+                }
+            });
+
+        })(document);
+    </script>
+</body>
+</html>
